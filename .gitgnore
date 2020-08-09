@@ -18,6 +18,8 @@ media
 .my_env/
 db.sqlite3
 ./my_api/__pycache__/
+customers/__pycache__/
+customers/migrations/__pycache__/
 
 
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
