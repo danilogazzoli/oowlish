@@ -1,4 +1,4 @@
-from oowlish.models import Customer
+from customers.models import Customer
 from django.core.management.base import BaseCommand, CommandError
 import csv
 from .maps import get_coords
@@ -22,7 +22,7 @@ class Command(BaseCommand):
             raise CommandError('No file was specified.')
         errors = False
         with open(filename, 'r', newline='', encoding='utf-8') as file:
-            reader = csv.DictReader(file, delimiter=';')
+            reader = csv.DictReader(file, delimiter=',')
             try:
                 for row in reader:
                     coord = get_coords(google_map_request(row['city']))
