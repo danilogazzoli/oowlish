@@ -1,8 +1,7 @@
 from customers.models import Customer
 from django.core.management.base import BaseCommand, CommandError
 import csv
-from .maps import get_coords
-from .maps import google_map_request
+from .maps import Maps
 
 
 class Command(BaseCommand):
@@ -21,20 +20,23 @@ class Command(BaseCommand):
         if not filename:
             raise CommandError('No file was specified.')
         errors = False
+        customers = []
+        maps = Maps()
         with open(filename, 'r', newline='', encoding='utf-8') as file:
             reader = csv.DictReader(file, delimiter=',')
             try:
                 for row in reader:
-                    coord = get_coords(google_map_request(row['city']))
-                    customers = Customer(first_name=row['first_name'],
-                                          last_name=row['last_name'],
-                                          email=row['email'],
-                                          gender=row['gender'],
-                                          company=row['company'],
-                                          city=row['city'],
-                                          title=row['title'],
-                                          latitude= coord['Latitude'],
-                                          longitutde=coord['Longitude'])
+                    print(f'Id to be imported:{row["id"]}')
+                    coord = maps.get_coords(row['city'])
+                    customers.append(Customer(first_name=row['first_name'],
+                                              last_name=row['last_name'],
+                                              email=row['email'],
+                                              gender=row['gender'],
+                                              company=row['company'],
+                                              city=row['city'],
+                                              title=row['title'],
+                                              latitude= coord['Latitude'],
+                                              longitude=coord['Longitude']))
             except KeyError:
                 # File structure is incorrect, its first column must be "name".
                 errors = True
