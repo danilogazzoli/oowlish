@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config("DEBUG")
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
@@ -40,12 +40,14 @@ DJANGO_APPS = [
 ]
 
 LOCAL_APPS = [
-   "customers"
+   "customers",
+    "frontend"
 ]
 
 EXTERNAL_APPS = [
     "rest_framework",
-    "django_filters"
+    "django_filters",
+    "drf_yasg"
 ]
 
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + EXTERNAL_APPS

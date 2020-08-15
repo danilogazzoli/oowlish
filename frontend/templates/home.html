@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{%block content %}
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading centerwelcome">Welcome!</div>
+    <div class="panel-body">
+    <h5>This is a simple listing of customers developed as part of the Oowlish test.</h5>
+    <br>
+    <h5>The tools used to develop the application were:</h5>
+    <br>
+    <h5><b>BackEnd:</b></h5>
+    <h5>* Python 3.7.4</h5>
+    <h5>* Django 3</h5>
+    <h5>* Django Rest Framework</h5>
+    <h5>* Django Filter</h5>
+    <br>
+    <h5><b>FrontEnd:</b></h5>
+    <h5>* Django 3</h5>
+    <h5>* Bootstrap 3</h5>
+    <h5>* JQuery</h5>
+    <h5>* Web Package (HTML, CSS, JS)</h5>
+    </div>
+    <div class="panel-footer">
+    </div>
+
+  </div>
+</div>
+
+<script>
+    document.getElementById('customerlink').classList.remove('active');
+    document.getElementById('homelink').classList.add('active');
+</script>
+{% endblock %}

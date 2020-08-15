@@ -16,14 +16,41 @@ Including another URLconf
 from rest_framework import routers
 from django.contrib import admin
 from django.urls import path
+from frontend.views.home import HomeTemplateView
+from frontend.views.customer import CustomerTemplateView
+from rest_framework import permissions
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
 from customers.api import CustomerViewSet
+from django.conf.urls import include
+from django.conf.urls import url
+
+
+schema_view = get_schema_view(
+   openapi.Info(
+      title="Snippets API",
+      default_version='v1',
+      description="Test description",
+      terms_of_service="https://www.google.com/policies/terms/",
+      contact=openapi.Contact(email="contact@snippets.local"),
+      license=openapi.License(name="BSD License"),
+   ),
+   public=True,
+   permission_classes=(permissions.AllowAny,),
+)
+
 
 routes = routers.DefaultRouter()
-routes.register(r'v1/customers', CustomerViewSet, basename="customers")
+routes.register(r'v1/customers', CustomerViewSet)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+   url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
+   url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+   url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+
+   path('accounts/login/', admin.site.urls),
+   path('api/', include(routes.urls)),
+
+   path('', HomeTemplateView.as_view(), name="home"),
+   path('customers/', CustomerTemplateView.as_view(), name="customers"),
 ]
-
-urlpatterns += routes.urls
-

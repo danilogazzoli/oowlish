@@ -10,4 +10,4 @@ class CustomerViewSet(ModelViewSet):
     serializer_class = CustomerSerializer
     queryset = Customer.objects.all()
     filter_backends = [SearchFilter, DjangoFilterBackend]
-    search_fields = ["id","name"]
+    search_fields = ["id","first_name"]
