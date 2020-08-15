@@ -5,8 +5,7 @@ django-filter==2.3.0
 djangorestframework==3.11.1
 googlemaps==4.4.2
 idna==2.10
-prettyconf==2.1.0
-PrettyConfig==0.0.1
+prettyconf==2.0.1
 pytz==2020.1
 requests==2.24.0
 sqlparse==0.3.1
