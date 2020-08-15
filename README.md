@@ -58,6 +58,27 @@ Now it's possible to start the server by running:
 $ python manage.py runserver
 ```
 
+### Run customized command
+
+There's a special command that is intended to import the customers data as well as query on the Google Maps API their respective latitude and longitude.
+The syntax of the command is:
+
+```sh
+$ python manage.py import_customers {customers.csv file}
+```
+
+Example:
+
+```sh
+$ python manage.py import_customers customers.csv
+```
+
+The customers file requires the following fields, separated by comma:
+
+```sh
+id,first_name,last_name,email,gender,company,city,title
+```
+
 ### Customer's endpoints
 
 In order to get the list of customers, it's necessary to do a GET action on:
